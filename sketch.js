@@ -19,7 +19,7 @@ let imgBlueVal;
 //pre-loading image and font
 function preload()
 {
-  mondrianImage = loadImage("./NeonMondrian.jpg");
+  mondrianImage = loadImage("./NeonMondrian_1.jpg");
   headerFont = loadFont("./BlackHan.ttf");
 }
 
@@ -30,7 +30,7 @@ function setup()
 
   //loading "original" image's pixels
   mondrianImage.loadPixels();
-  mondrianDup = mondrianImage;
+  mondrianDup = mondrianImage.get();
 
   //code for generating interface text
   fill(225,50,150);
@@ -82,7 +82,7 @@ function draw()
     imgBlueVal = mondrianImage.pixels[i+2];
 
     //detecting red color in duplicate image, and modifying pixel values
-    if((imgRedVal<=255 && imgRedVal>=200) && (imgGreenVal<=150 && imgGreenVal>=0) && (imgBlueVal<=255 && imgBlueVal>=0))
+    if((imgRedVal<=255 && imgRedVal>=175) && (imgGreenVal<=150 && imgGreenVal>=0) && (imgBlueVal<=255 && imgBlueVal>=0))
     {
       mondrianDup.pixels[i+0] = red(redPicker_Val);
       mondrianDup.pixels[i+1] = green(redPicker_Val);
@@ -90,7 +90,7 @@ function draw()
     }
 
     //detecting yellow color in duplicate image, and modifiying pixel values
-    if((imgRedVal<=255 && imgRedVal>=200) && (imgGreenVal<=255 && imgGreenVal>=175) && (imgBlueVal<=100 && imgBlueVal>=0))
+    if((imgRedVal<=255 && imgRedVal>=200) && (imgGreenVal<=255 && imgGreenVal>=100) && (imgBlueVal<=100 && imgBlueVal>=0))
     {
       mondrianDup.pixels[i+0] = red(yellowPicker_Val);
       mondrianDup.pixels[i+1] = green(yellowPicker_Val);
@@ -98,7 +98,7 @@ function draw()
     }
 
     //detecting blue color in duplicate image, and modifiying pixel values
-    if((imgRedVal<=100 && imgRedVal>=0) && (imgGreenVal<=100 && imgGreenVal>=0) && (imgBlueVal<=255 && imgBlueVal>=100))
+    if((imgRedVal<=100 && imgRedVal>=0) && (imgGreenVal<=100 && imgGreenVal>=0) && (imgBlueVal<=255 && imgBlueVal>=95))
     {
       mondrianDup.pixels[i+0] = red(bluePicker_Val);
       mondrianDup.pixels[i+1] = green(bluePicker_Val);
@@ -108,7 +108,10 @@ function draw()
   //updating duplicate image's pixels
   mondrianDup.updatePixels();
 
-  //resizing duplicate image to maintain aspect-ratio
+  //resizing images to maintain aspect-ratio
+  mondrianImage.resize(0,height);
   mondrianDup.resize(0,height);
+  
+  //generating edited image in real-time
   image(mondrianDup,0,0);
 }
